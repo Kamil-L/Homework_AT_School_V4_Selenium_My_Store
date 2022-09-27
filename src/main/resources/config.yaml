@@ -1,0 +1,9 @@
+environment:
+  test:
+    envName: test
+    appUrl: http://146.59.32.4/index.php
+    active: true
+
+browser:
+  browserName: chrome
+  webelementTimeout: 15
