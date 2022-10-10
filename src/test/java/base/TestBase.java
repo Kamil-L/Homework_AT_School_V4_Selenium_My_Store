@@ -1,4 +1,4 @@
-package tests;
+package base;
 
 import config.AppProperties;
 import config.DriverFactory;
@@ -23,7 +23,7 @@ public class TestBase {
         driver = driverFactory.getDriver();
         log.info("<<<<< Driver initialized >>>>");
         driver.get(System.getProperty("appUrl"));
-        log.info("<<<<< Driver opened" + System.getProperty("appUrl") + " >>>>>");
+        log.info("<<<<< Driver opened " + System.getProperty("appUrl") + " >>>>>");
     }
 
     @AfterAll

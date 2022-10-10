@@ -24,30 +24,46 @@ public class DriverFactory {
         log.info("BrowserName: " + browserName);
         switch (this.browserName) {
             case "chrome":
-                ChromeOptions optionsChrome = new ChromeOptions();
-                WebDriverManager.chromedriver().setup();
-                optionsChrome.addArguments("start-maximized");
-                driver = new ChromeDriver(optionsChrome);
+                getChromeDriver();
                 break;
             case "firefox":
-                FirefoxOptions optionsFirefox = new FirefoxOptions();
-                WebDriverManager.firefoxdriver().setup();
-                optionsFirefox.addArguments("start-maximized");
-                driver = new FirefoxDriver(optionsFirefox);
+                getFirefoxDriver();
                 break;
             case "ie":
-                driver = new InternetExplorerDriver();
-                driver.manage().window().maximize();
+                getInternetExplorerDriver();
                 break;
             case "edge":
-                EdgeOptions optionsEdge = new EdgeOptions();
-                WebDriverManager.edgedriver().setup();
-                optionsEdge.addArguments("start-maximized");
-                driver = new EdgeDriver(optionsEdge);
+                getEdgeDriver();
                 break;
             default:
                 throw new IllegalStateException("Incorrect browser type! Please check your configuration");
         }
         return this.driver;
+    }
+
+    private void getChromeDriver() {
+        ChromeOptions optionsChrome = new ChromeOptions();
+        WebDriverManager.chromedriver().setup();
+        optionsChrome.addArguments("start-maximized");
+        driver = new ChromeDriver(optionsChrome);
+    }
+
+    private void getFirefoxDriver() {
+        FirefoxOptions optionsFirefox = new FirefoxOptions();
+        WebDriverManager.firefoxdriver().setup();
+        optionsFirefox.addArguments("start-maximized");
+        driver = new FirefoxDriver(optionsFirefox);
+    }
+
+    private void getInternetExplorerDriver() {
+        driver = new InternetExplorerDriver();
+        driver.manage().window().maximize();
+    }
+
+    private void getEdgeDriver() {
+        EdgeOptions optionsEdge = new EdgeOptions();
+        WebDriverManager.edgedriver().setup();
+        optionsEdge.addArguments("start-maximized");
+        driver = new EdgeDriver(optionsEdge);
     }
 }

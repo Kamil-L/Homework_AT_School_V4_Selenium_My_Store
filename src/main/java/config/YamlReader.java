@@ -8,7 +8,6 @@ import java.io.IOException;
 
 public class YamlReader {
 
-
     public static Config config;
 
     public Config getConfig() {

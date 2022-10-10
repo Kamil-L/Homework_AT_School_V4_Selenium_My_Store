@@ -4,10 +4,15 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-public class FiltersSideMenuPage extends BasePage {
+public class FiltersPage extends BasePage {
 
-    public FiltersSideMenuPage(WebDriver driver) {
+    private static final Logger log = LoggerFactory.getLogger(FiltersPage.class);
+
+
+    public FiltersPage(WebDriver driver) {
         super(driver);
     }
 
@@ -32,6 +37,22 @@ public class FiltersSideMenuPage extends BasePage {
     @FindBy(css = ".overlay__content")
     private WebElement coverage;
 
+    private String getFiltersPriceRange() {
+        return currentPriceRangeFilter.getText().replaceAll("\\$|\\.00", "");
+    }
+
+    private int getMinLabelPrice() {
+        return Integer.parseInt(getFiltersPriceRange().substring(0, 1));
+    }
+
+    private int getMaxLabelPrice() {
+        return Integer.parseInt(getFiltersPriceRange().substring(4));
+    }
+
+    public boolean checkForSearchFiltersToBeDisplayed() {
+        return isDisplayed(searchFilters);
+    }
+
 
     public int setMaxPriceFilterValue(int max) {
         moveRightSliderHandler(max);
@@ -43,12 +64,15 @@ public class FiltersSideMenuPage extends BasePage {
         return min;
     }
 
-    public void setPriceFilterValues(int min, int max) {
+    public FiltersPage setPriceFilterValues(int min, int max) {
         moveLeftSliderHandler(min);
         moveRightSliderHandler(max);
+        log.info("<<<<< Set minimum product price: " + min + " >>>>>");
+        log.info("<<<<< Set maximum product price: " + max + " >>>>>");
+        return this;
     }
 
-    public void moveLeftSliderHandler(int min) {
+    public FiltersPage moveLeftSliderHandler(int min) {
         int moveValue = min - getMinLabelPrice();
         if (moveValue > 0) {
             for (int i = 0; i < moveValue; i++) {
@@ -56,9 +80,17 @@ public class FiltersSideMenuPage extends BasePage {
                 waitToBeInvisible(coverage);
             }
         }
+        return this;
     }
 
-    public void moveRightSliderHandler(int max) {
+    public FiltersPage clickClearFilterButton() {
+        waitToBeVisible(clearFilterButton);
+        click(clearFilterButton);
+        waitToBeInvisible(coverage);
+        return this;
+    }
+
+    public FiltersPage moveRightSliderHandler(int max) {
         int moveValue = getMaxLabelPrice() - max;
         if (moveValue > 0) {
             for (int i = 0; i < moveValue; i++) {
@@ -66,33 +98,6 @@ public class FiltersSideMenuPage extends BasePage {
                 waitToBeInvisible(coverage);
             }
         }
-    }
-
-    private String getFiltersPriceRange() {
-        String priceFilterRange = currentPriceRangeFilter.getText();
-        return priceFilterRange.replaceAll("\\$|\\.00", "");
-    }
-
-    private int getMinLabelPrice() {
-        return Integer.parseInt(getFiltersPriceRange().substring(0,1));
-    }
-
-    private int getMaxLabelPrice() {
-        return Integer.parseInt(getFiltersPriceRange().substring(4));
-    }
-
-    public boolean checkForSearchFiltersToBeDisplayed() {
-        return isDisplayed(searchFilters);
-    }
-
-    public void clickClearAllFiltersButton() {
-        if (isDisplayed(clearAllFiltersButton))
-            click(clearAllFiltersButton);
-    }
-
-    public void clickClearFilterButton() {
-        waitToBeVisible(clearFilterButton);
-        click(clearFilterButton);
-        waitToBeInvisible(coverage);
+        return this;
     }
 }

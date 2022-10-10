@@ -6,4 +6,4 @@ environment:
 
 browser:
   browserName: chrome
-  webelementTimeout: 15
+  webelementTimeout: 30

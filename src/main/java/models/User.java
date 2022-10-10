@@ -1,4 +1,5 @@
-package models.userGenerator;
+package models;
+
 
 public class User {
 
@@ -6,23 +7,43 @@ public class User {
     private final String lastName;
     private final String email;
     private final String password;
-    private final String birthday;
+    private final String birthDate;
 
-
-    public User(String firstName, String lastName, String email, String password, String birthday) {
+    public User(String firstName, String lastName, String email, String password, String birthDate) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
-        this.birthday = birthday;
+        this.birthDate = birthDate;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getBirthDate() {
+        return birthDate;
     }
 
     public User(UserBuilder userBuilder) {
+
         this.firstName = userBuilder.firstName;
         this.lastName = userBuilder.lastName;
         this.email = userBuilder.email;
         this.password = userBuilder.password;
-        this.birthday = userBuilder.birthday;
+        this.birthDate = userBuilder.birthDate;
     }
 
     public static final class UserBuilder {
@@ -31,9 +52,7 @@ public class User {
         private String lastName;
         private String email;
         private String password;
-        private String birthday;
-
-
+        private String birthDate;
 
         public UserBuilder setFirstName(String firstName) {
             this.firstName = firstName;
@@ -55,12 +74,13 @@ public class User {
             return this;
         }
 
-        public UserBuilder setBirthday(String birthday) {
-            this.birthday = birthday;
+        public UserBuilder setBirthday(String birthDate) {
+            this.birthDate = birthDate;
             return this;
         }
 
         public User build() {
+
             if (firstName.isEmpty()) {
                 throw new IllegalStateException("First name cannot be empty");
             }
