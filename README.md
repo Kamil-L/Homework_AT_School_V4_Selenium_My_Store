@@ -84,29 +84,29 @@ MyStore shop final test project
       
       • click on proceed to checkout button on product popup
       
-      •click ‘Billing address differs from shipping address’
+      • click ‘Billing address differs from shipping address’
       
-      •fill invoice address form
+      • fill invoice address form
       
-      •select shipping method
+      • select shipping method
       
-      •select Pay by Check
+      • select Pay by Check
       
-      •accept terms of service
+      • accept terms of service
       
-      •click order button
+      • click order button
       
-      •on order confirmation page check if details -> name, quantity price, total price, ‘shipping and handling’, Payment method, Shipping method, check payments details are correct
+      • on order confirmation page check if details -> name, quantity price, total price, ‘shipping and handling’, Payment method, Shipping method, check payments      details are correct
       
-      •remember Order reference number
+      • remember Order reference number
       
-      •go to order history
+      • go to order history
       
-      •find Order reference number on the list
+      • find Order reference number on the list
       
-      •open order details page by clicking ‘Details’ button
+      • open order details page by clicking ‘Details’ button
       
-      •check if date, total price, payment (Awaiting check payment), delivery and invoice address status are correct
+      • check if date, total price, payment (Awaiting check payment), delivery and invoice address status are correct
 
 
 
